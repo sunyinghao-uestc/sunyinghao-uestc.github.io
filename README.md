@@ -1,1 +1,1 @@
-This is the source code to Yinghao Sun's public academic website: https://sunyinghao-uestc.github.io/.
+This is the source code of Yinghao Sun's public academic website: https://sunyinghao-uestc.github.io/.
