@@ -79,6 +79,16 @@ class PartProjectPageTests(unittest.TestCase):
         projects = home[home.index("<h2>Projects</h2>") :]
         self.assertNotIn("PART: Physics-Aware Radar Transformer", projects)
 
+    def test_home_page_includes_postdoctoral_fellowship_news(self):
+        home = (REPOSITORY / "index.html").read_text(encoding="utf-8")
+        news = home[home.index("<h2>News</h2>") : home.index("<h2>Research</h2>")]
+        self.assertIn(
+            "🔥 July 24, 2026: I have been awarded a fellowship from the 79th General Program of the China Postdoctoral Science Foundation.",
+            news,
+        )
+        self.assertIn("<ul>", news)
+        self.assertIn("<li>", news)
+
     def test_video_demos_have_text_descriptions(self):
         self.assertEqual(2, len(self.parser.videos))
         described_by = {video.get("aria-describedby") for video in self.parser.videos}
