@@ -158,6 +158,113 @@
         </div>
       </section>
 
+      <section id="quantitative-results" class="section results-tables-section">
+        <div class="section-heading">
+          <p class="section-kicker">Quantitative results</p>
+          <h2>Compact, robust, and class-agnostic.</h2>
+          <p>All values below are reproduced from the current manuscript. Scroll horizontally to inspect wide benchmark tables.</p>
+        </div>
+
+        <div class="results-table-stack">
+          <figure class="part-results-table">
+            <figcaption><span>Table 1</span>Overall comparison with existing 3D detectors.</figcaption>
+            <div class="table-scroll">
+              <table>
+                <thead><tr><th scope="col">Method</th><th scope="col">Params.</th><th scope="col">Mod.</th><th scope="col">CA-AP ↑</th><th scope="col">mASTE ↓</th><th scope="col">mAVE ↓</th><th scope="col">mATE ↓</th></tr></thead>
+                <tbody>
+                  <tr><th scope="row">CenterPoint</th><td>23M</td><td>L</td><td>0.8746</td><td>0.4988</td><td><span class="runner-up">0.7097</span></td><td>0.4542</td></tr>
+                  <tr><th scope="row">VoxelNeXT</th><td>31M</td><td>L</td><td>0.8801</td><td>0.4498</td><td><strong>0.6166</strong></td><td><span class="runner-up">0.4172</span></td></tr>
+                  <tr><th scope="row">TransFusion-L</th><td>32M</td><td>L</td><td><span class="runner-up">0.8865</span></td><td><span class="runner-up">0.3617</span></td><td>0.8600</td><td><span class="runner-up">0.2790</span></td></tr>
+                  <tr class="table-divider"><th scope="row">FCOS3D</th><td>55M</td><td>C</td><td>0.5254</td><td>1.2274</td><td>2.6908</td><td>1.2818</td></tr>
+                  <tr><th scope="row">PGD</th><td>56M</td><td>C</td><td>0.5423</td><td>1.4796</td><td>2.7007</td><td>1.3143</td></tr>
+                  <tr><th scope="row">PETR</th><td>83M</td><td>C</td><td>0.6553</td><td>2.9833</td><td>2.3070</td><td>0.9340</td></tr>
+                  <tr class="table-divider"><th scope="row">BEVFusion</th><td>157M</td><td>LC</td><td><strong>0.8877</strong></td><td><span class="runner-up">0.3594</span></td><td>0.8138</td><td><strong>0.2772</strong></td></tr>
+                  <tr><th scope="row">LiRaFusion</th><td>23M</td><td>LR</td><td><span class="runner-up">0.8865</span></td><td>0.5282</td><td>0.7556</td><td>0.4792</td></tr>
+                  <tr><th scope="row">CRTFusion</th><td>81M</td><td>RC</td><td>0.8612</td><td>0.6699</td><td>0.7711</td><td>0.6206</td></tr>
+                  <tr class="table-divider"><th scope="row">DAQI Proposals</th><td>N/A</td><td>R</td><td>0.6776</td><td>0.5884</td><td>1.5758</td><td>1.7806</td></tr>
+                  <tr><th scope="row">PillarNet-R</th><td>16M</td><td>R</td><td>0.7492</td><td>0.9586</td><td>0.8702</td><td>0.8919</td></tr>
+                  <tr><th scope="row">RadarDistill</th><td>41M</td><td>R(L)</td><td>0.7684</td><td>0.7764</td><td><span class="runner-up">0.7499</span></td><td>0.7587</td></tr>
+                  <tr class="table-divider part-row"><th scope="row">PART</th><td><strong>1.1M</strong></td><td>R</td><td><span class="runner-up">0.8827</span></td><td><strong>0.3188</strong></td><td>0.8084</td><td>1.4846</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="table-note">Best value in <strong>bold</strong>; next two best distinct values are <span class="runner-up">underlined</span>. L: lidar; C: camera; R: radar. DAQI Proposals use DBSCAN cluster centroids and mean velocities directly. RadarDistill uses a lidar teacher during training but radar input at inference.</p>
+          </figure>
+
+          <figure class="part-results-table">
+            <figcaption><span>Table 2</span>Robustness comparison under challenging conditions.</figcaption>
+            <div class="table-scroll">
+              <table>
+                <thead>
+                  <tr><th scope="col" rowspan="2">Method</th><th scope="col" rowspan="2">Mod.</th><th scope="colgroup" colspan="3">Night</th><th scope="colgroup" colspan="3">Rainy</th><th scope="colgroup" colspan="3">Night + Rainy</th></tr>
+                  <tr><th scope="col">CA-AP ↑</th><th scope="col">mASTE ↓</th><th scope="col">mAVE ↓</th><th scope="col">CA-AP ↑</th><th scope="col">mASTE ↓</th><th scope="col">mAVE ↓</th><th scope="col">CA-AP ↑</th><th scope="col">mASTE ↓</th><th scope="col">mAVE ↓</th></tr>
+                </thead>
+                <tbody>
+                  <tr><th scope="row">CenterPoint</th><td>L</td><td>0.8297</td><td>0.3398</td><td>0.7795</td><td>0.8528</td><td>0.5671</td><td><span class="runner-up">0.6729</span></td><td>0.8107</td><td>0.3410</td><td>0.7752</td></tr>
+                  <tr><th scope="row">VoxelNeXT</th><td>L</td><td>0.8361</td><td>0.3602</td><td><span class="runner-up">0.6968</span></td><td>0.8606</td><td>0.4503</td><td><strong>0.5776</strong></td><td>0.7861</td><td>0.4930</td><td><span class="runner-up">0.6652</span></td></tr>
+                  <tr><th scope="row">TransFusion-L</th><td>L</td><td>0.8584</td><td><strong>0.2530</strong></td><td><span class="runner-up">0.6825</span></td><td>0.8662</td><td><span class="runner-up">0.3699</span></td><td>0.8649</td><td>0.8520</td><td><span class="runner-up">0.3122</span></td><td>0.6785</td></tr>
+                  <tr class="table-divider"><th scope="row">FCOS3D</th><td>C</td><td>0.5197</td><td>0.6753</td><td>2.0607</td><td>0.5203</td><td>1.3734</td><td>2.6823</td><td>0.4973</td><td>0.6429</td><td>2.3148</td></tr>
+                  <tr><th scope="row">PGD</th><td>C</td><td>0.6035</td><td>0.6951</td><td>2.6314</td><td>0.5114</td><td>1.2124</td><td>2.5529</td><td>0.5704</td><td>0.5634</td><td>1.9414</td></tr>
+                  <tr><th scope="row">PETR</th><td>C</td><td>0.6855</td><td>1.6695</td><td>2.3924</td><td>0.6978</td><td>3.2089</td><td>2.0686</td><td>0.7257</td><td>1.4301</td><td>2.5327</td></tr>
+                  <tr class="table-divider"><th scope="row">BEVFusion</th><td>LC</td><td>0.8665</td><td><span class="runner-up">0.2533</span></td><td>0.7634</td><td><span class="runner-up">0.8754</span></td><td><span class="runner-up">0.4137</span></td><td>0.8732</td><td>0.8768</td><td>0.3278</td><td>0.7924</td></tr>
+                  <tr><th scope="row">LiRaFusion</th><td>LR</td><td><span class="runner-up">0.8816</span></td><td>0.3382</td><td>0.7499</td><td><span class="runner-up">0.8864</span></td><td>0.5756</td><td>0.8066</td><td><span class="runner-up">0.8793</span></td><td><span class="runner-up">0.3007</span></td><td><span class="runner-up">0.5332</span></td></tr>
+                  <tr><th scope="row">CRTFusion</th><td>CR</td><td><span class="runner-up">0.8683</span></td><td>0.4730</td><td>0.8821</td><td>0.8480</td><td>0.7055</td><td>1.0037</td><td><span class="runner-up">0.8863</span></td><td>0.3864</td><td>1.0296</td></tr>
+                  <tr class="table-divider"><th scope="row">DAQI Proposals</th><td>R</td><td>0.7026</td><td>0.4104</td><td>1.2325</td><td>0.6789</td><td>0.7148</td><td>1.6498</td><td>0.6889</td><td>0.4865</td><td>1.2728</td></tr>
+                  <tr><th scope="row">PillarNet-R</th><td>R</td><td>0.8084</td><td>0.6602</td><td>0.9246</td><td>0.7711</td><td>1.0402</td><td>1.0874</td><td>0.8266</td><td>0.6334</td><td>0.6675</td></tr>
+                  <tr><th scope="row">RadarDistill</th><td>R(L)</td><td>0.8162</td><td>0.3763</td><td>0.8175</td><td>0.7996</td><td>0.8528</td><td>0.7877</td><td>0.8164</td><td>0.4360</td><td>2.0693</td></tr>
+                  <tr class="table-divider part-row"><th scope="row">PART</th><td>R</td><td><strong>0.8930</strong></td><td><span class="runner-up">0.2585</span></td><td><strong>0.4651</strong></td><td><strong>0.8916</strong></td><td><strong>0.2811</strong></td><td><span class="runner-up">0.7590</span></td><td><strong>0.8892</strong></td><td><strong>0.2034</strong></td><td><strong>0.2994</strong></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </figure>
+
+          <figure class="part-results-table">
+            <figcaption><span>Table 3</span>Comparison on rare and safety-relevant object categories.</figcaption>
+            <div class="table-scroll">
+              <table>
+                <thead>
+                  <tr><th scope="col" rowspan="2">Method</th><th scope="col" rowspan="2">Mod.</th><th scope="colgroup" colspan="3">Police Vehicles<br><small>N<sub>GT</sub> = 70</small></th><th scope="colgroup" colspan="3">Wheelchair<br><small>N<sub>GT</sub> = 260</small></th><th scope="colgroup" colspan="3">Personal Mobility<br><small>N<sub>GT</sub> = 102</small></th><th scope="colgroup" colspan="3">Animal<br><small>N<sub>GT</sub> = 13</small></th></tr>
+                  <tr><th scope="col">Recall ↑</th><th scope="col">ASTE ↓</th><th scope="col">AVE ↓</th><th scope="col">Recall ↑</th><th scope="col">ASTE ↓</th><th scope="col">AVE ↓</th><th scope="col">Recall ↑</th><th scope="col">ASTE ↓</th><th scope="col">AVE ↓</th><th scope="col">Recall ↑</th><th scope="col">ASTE ↓</th><th scope="col">AVE ↓</th></tr>
+                </thead>
+                <tbody>
+                  <tr><th scope="row">CenterPoint</th><td>L</td><td>0.8286</td><td>0.2633</td><td>0.5565</td><td>0.0346</td><td>0.4032</td><td>0.3574</td><td>0.1863</td><td>0.2331</td><td>0.4617</td><td>0.1538</td><td>0.0979</td><td>0.2048</td></tr>
+                  <tr><th scope="row">VoxelNeXT</th><td>L</td><td>0.8571</td><td>0.2872</td><td>0.6912</td><td>0.0115</td><td>0.3614</td><td>0.4953</td><td>0.1765</td><td>0.1923</td><td>0.3328</td><td class="unavailable">0.0000</td><td class="unavailable">N/A</td><td class="unavailable">N/A</td></tr>
+                  <tr><th scope="row">TransFusion-L</th><td>L</td><td>0.5857</td><td>0.2038</td><td>0.6645</td><td>0.0038</td><td>0.4830</td><td>0.1431</td><td>0.0196</td><td>0.1621</td><td>0.4392</td><td class="unavailable">0.0000</td><td class="unavailable">N/A</td><td class="unavailable">N/A</td></tr>
+                  <tr class="table-divider"><th scope="row">FCOS3D</th><td>C</td><td>0.5286</td><td>0.5357</td><td>3.9904</td><td class="unavailable">0.0000</td><td class="unavailable">N/A</td><td class="unavailable">N/A</td><td>0.0588</td><td>0.2053</td><td>3.3621</td><td class="unavailable">0.0000</td><td class="unavailable">N/A</td><td class="unavailable">N/A</td></tr>
+                  <tr><th scope="row">PGD</th><td>C</td><td>0.6143</td><td>0.4390</td><td>3.8758</td><td>0.0038</td><td>0.2099</td><td>1.5279</td><td>0.0392</td><td>0.1553</td><td>3.1449</td><td class="unavailable">0.0000</td><td class="unavailable">N/A</td><td class="unavailable">N/A</td></tr>
+                  <tr><th scope="row">PETR</th><td>C</td><td class="unavailable">0.0000</td><td class="unavailable">N/A</td><td class="unavailable">N/A</td><td class="unavailable">0.0000</td><td class="unavailable">N/A</td><td class="unavailable">N/A</td><td class="unavailable">0.0000</td><td class="unavailable">N/A</td><td class="unavailable">N/A</td><td class="unavailable">0.0000</td><td class="unavailable">N/A</td><td class="unavailable">N/A</td></tr>
+                  <tr class="table-divider"><th scope="row">BEVFusion</th><td>LC</td><td>0.6000</td><td>0.3038</td><td>0.6558</td><td class="unavailable">0.0000</td><td class="unavailable">N/A</td><td class="unavailable">N/A</td><td class="unavailable">0.0000</td><td class="unavailable">N/A</td><td class="unavailable">N/A</td><td class="unavailable">0.0000</td><td class="unavailable">N/A</td><td class="unavailable">N/A</td></tr>
+                  <tr><th scope="row">LiRaFusion</th><td>LR</td><td>0.5143</td><td>0.2723</td><td>0.7073</td><td>0.0077</td><td>0.1715</td><td>0.2147</td><td class="unavailable">0.0000</td><td class="unavailable">N/A</td><td class="unavailable">N/A</td><td class="unavailable">0.0000</td><td class="unavailable">N/A</td><td class="unavailable">N/A</td></tr>
+                  <tr><th scope="row">CRTFusion</th><td>CR</td><td>0.6286</td><td>0.5582</td><td>0.7085</td><td>0.0192</td><td>0.2666</td><td>0.4843</td><td>0.1471</td><td>0.1546</td><td>1.6308</td><td class="unavailable">0.0000</td><td class="unavailable">N/A</td><td class="unavailable">N/A</td></tr>
+                  <tr class="table-divider"><th scope="row">DAQI Proposals</th><td>R</td><td>0.8571</td><td>0.5975</td><td>2.3529</td><td>0.8808</td><td>0.3043</td><td>0.3735</td><td>0.4706</td><td>0.1331</td><td>1.3884</td><td>0.6154</td><td>0.1305</td><td>0.1662</td></tr>
+                  <tr><th scope="row">PillarNet-R</th><td>R</td><td>0.5588</td><td>0.4506</td><td>0.9424</td><td>0.0115</td><td>0.1633</td><td>0.2811</td><td class="unavailable">0.0000</td><td class="unavailable">N/A</td><td class="unavailable">N/A</td><td class="unavailable">0.0000</td><td class="unavailable">N/A</td><td class="unavailable">N/A</td></tr>
+                  <tr><th scope="row">RadarDistill</th><td>R(L)</td><td>0.7647</td><td>0.3795</td><td>0.7877</td><td>0.0154</td><td>0.2340</td><td>0.4015</td><td class="unavailable">0.0000</td><td class="unavailable">N/A</td><td class="unavailable">N/A</td><td class="unavailable">0.0000</td><td class="unavailable">N/A</td><td class="unavailable">N/A</td></tr>
+                  <tr class="table-divider part-row"><th scope="row">PART</th><td>R</td><td><strong>0.9571</strong></td><td>0.2931</td><td>1.0003</td><td><strong>0.9577</strong></td><td>0.1142</td><td>0.2161</td><td><strong>0.8039</strong></td><td>0.1063</td><td>0.6048</td><td><strong>0.9231</strong></td><td>0.2266</td><td>0.1838</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="table-note">N<sub>GT</sub> is the number of eligible ground-truth boxes. Gray cells indicate zero recall despite ground-truth instances; N/A denotes an undefined error because no true positive is available.</p>
+          </figure>
+
+          <figure class="part-results-table">
+            <figcaption><span>Table 4</span>Component ablation.</figcaption>
+            <div class="table-scroll">
+              <table>
+                <thead><tr><th scope="col">Exp.</th><th scope="col">CA-AP ↑</th><th scope="col">mASTE ↓</th><th scope="col">mAVE ↓</th><th scope="col">Special Recall ↑</th></tr></thead>
+                <tbody>
+                  <tr><th scope="row">w/o DAQI</th><td>0.6198</td><td>0.6777</td><td>1.3048</td><td>0.6646</td></tr>
+                  <tr><th scope="row">w/o PGCA</th><td><span class="runner-up">0.8815</span></td><td><span class="runner-up">0.3300</span></td><td>0.8348</td><td><span class="runner-up">0.8931</span></td></tr>
+                  <tr><th scope="row">w/o UAS</th><td><span class="runner-up">0.7948</span></td><td><strong>0.3149</strong></td><td><span class="runner-up">0.8292</span></td><td>0.3899</td></tr>
+                  <tr><th scope="row">w/o PWSH</th><td><strong>0.8827</strong></td><td>0.3607</td><td><span class="runner-up">0.8325</span></td><td><span class="runner-up">0.9182</span></td></tr>
+                  <tr class="table-divider part-row"><th scope="row">FULL</th><td><strong>0.8827</strong></td><td><span class="runner-up">0.3188</span></td><td><strong>0.8084</strong></td><td><strong>0.9203</strong></td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="table-note">The w/o DAQI variant is reported at a fixed score threshold of 0.2 because it produces no valid detections at the standard 0.5 threshold; CA-AP uses the full confidence sweep. UAS: Uncertainty-Aware Supervision. PWSH: Point-Wise Surface Head. Special recall is evaluated over rare and safety-relevant categories.</p>
+          </figure>
+        </div>
+      </section>
+
       <section id="citation" class="section citation-section">
         <div class="citation-copy">
           <p class="section-kicker">Citation</p>
