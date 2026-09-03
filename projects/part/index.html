@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="PART: a physics-aware radar transformer for class-agnostic moving-object detection.">
+    <meta name="theme-color" content="#071824">
+    <title>PART — If It Moves, Radar Knows</title>
+    <link rel="icon" href="../../images/favicon/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="part.css">
+  </head>
+  <body>
+    <header class="hero">
+      <nav class="nav" aria-label="Primary navigation">
+        <a class="home-link" href="../../">← Yinghao Sun</a>
+        <a class="code-link" href="https://github.com/sunyinghao-uestc/PART">View code <span aria-hidden="true">↗</span></a>
+      </nav>
+
+      <div class="hero-content">
+        <p class="eyebrow">Radar-only perception · arXiv 2026</p>
+        <h1>If It Moves,<br><em>Radar Knows.</em></h1>
+        <p class="subtitle">A Physics-Aware Radar Transformer for<br>Class-Agnostic Moving-Object Detection</p>
+        <p class="authors">Yinghao Sun &nbsp;·&nbsp; Shuguang Li<sup>*</sup> &nbsp;·&nbsp; Jinliang Shao &nbsp;·&nbsp; Tieshan Li</p>
+        <p class="affiliation">School of Automation Engineering, University of Electronic Science and Technology of China</p>
+        <div class="actions" aria-label="Project links">
+          <a class="button button-primary" href="https://arxiv.org/abs/2609.02289">arXiv</a>
+          <a class="button button-outline" href="https://arxiv.org/pdf/2609.02289">Paper <span aria-hidden="true">↓</span></a>
+          <a class="button button-outline" href="https://github.com/sunyinghao-uestc/PART">Code <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+
+      <div class="radar-grid" aria-hidden="true">
+        <span class="radar-dot dot-one"></span>
+        <span class="radar-dot dot-two"></span>
+        <span class="radar-dot dot-three"></span>
+      </div>
+    </header>
+
+    <main>
+      <section id="overview" class="section overview-section">
+        <div class="section-heading">
+          <p class="section-kicker">Overview</p>
+          <h2>Detect motion beyond the training taxonomy.</h2>
+        </div>
+        <div class="overview-copy">
+          <p>Closed-set detectors can overlook rare moving objects simply because they were never assigned a familiar category. PART uses radar's direct Doppler measurements as category-independent physical evidence: it asks whether an object is moving, not whether it looks like a class seen during training.</p>
+          <p>Operating directly on temporally aggregated sparse radar points, PART predicts an existence confidence, representative surface point, and ground-plane velocity for every moving-object hypothesis.</p>
+        </div>
+      </section>
+
+      <section id="results" class="section results-section">
+        <div class="section-heading compact-heading">
+          <p class="section-kicker">Main results on nuScenes</p>
+          <h2>Compact model, motion-first output.</h2>
+        </div>
+        <div class="metric-grid" role="list" aria-label="Main results">
+          <article class="metric" role="listitem">
+            <p class="metric-value">1.1M</p>
+            <p class="metric-label">Parameters</p>
+          </article>
+          <article class="metric" role="listitem">
+            <p class="metric-value">0.8827</p>
+            <p class="metric-label">Class-agnostic AP</p>
+          </article>
+          <article class="metric" role="listitem">
+            <p class="metric-value">0.3188<span> m</span></p>
+            <p class="metric-label">Surface translation error</p>
+          </article>
+          <article class="metric" role="listitem">
+            <p class="metric-value">0.8084<span> m/s</span></p>
+            <p class="metric-label">Velocity error</p>
+          </article>
+          <article class="metric metric-accent" role="listitem">
+            <p class="metric-value">0.9203</p>
+            <p class="metric-label">Recall on rare objects</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="method" class="section method-section">
+        <div class="section-heading">
+          <p class="section-kicker">Method</p>
+          <h2>Physics guides every association.</h2>
+        </div>
+        <figure class="architecture">
+          <img src="assets/architecture.jpg" alt="Architecture of PART, from radar-point encoding and Doppler-aware query initialization to physics-guided cross-attention and prediction heads.">
+          <figcaption>PART encodes temporally aggregated radar points, initializes scene-dependent queries with DAQI, and refines them with a fully sparse transformer decoder using PGCA.</figcaption>
+        </figure>
+        <div class="method-grid">
+          <article>
+            <span class="method-index">01</span>
+            <h3>Doppler-Aware Query Initialization</h3>
+            <p>Forms input-dependent object queries by grouping radar returns that agree in position and velocity.</p>
+          </article>
+          <article>
+            <span class="method-index">02</span>
+            <h3>Physics-Guided Cross-Attention</h3>
+            <p>Uses radial-Doppler consistency and radar cross section to associate queries with meaningful returns.</p>
+          </article>
+          <article>
+            <span class="method-index">03</span>
+            <h3>Uncertainty-Aware Supervision</h3>
+            <p>Avoids treating plausible radar-supported hypotheses as hard negatives when annotations are incomplete.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="demos" class="section demos-section">
+        <div class="section-heading">
+          <p class="section-kicker">In the wild</p>
+          <h2>Motion evidence persists where appearance does not.</h2>
+        </div>
+        <div class="demo-grid">
+          <figure class="demo-card">
+            <video controls preload="metadata" poster="assets/qualitative/05462_full.jpg" aria-describedby="night-demo-description">
+              <source src="assets/demo-night.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <figcaption><span>Adverse illumination</span>Night-time driving scene with headlight glare.</figcaption>
+            <details class="demo-description">
+              <summary>Text description of this demonstration</summary>
+              <p id="night-demo-description">A forward-driving sequence is shown at night, where sparse street lighting and headlight glare make visual appearance unreliable. Across the frames, teal markers denote moving radar returns. Blue surface markers and arrows show PART's predicted moving-object location and ground-plane velocity. The sequence illustrates that radar motion evidence remains available as the illuminated vehicle moves through the dark and glare-affected scene.</p>
+            </details>
+          </figure>
+          <figure class="demo-card">
+            <video controls preload="metadata" poster="assets/qualitative/07694_full.jpg" aria-describedby="wheelchair-demo-description">
+              <source src="assets/demo-wheelchair.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <figcaption><span>Rare moving object</span>Powered wheelchair detection beyond the usual taxonomy.</figcaption>
+            <details class="demo-description">
+              <summary>Text description of this demonstration</summary>
+              <p id="wheelchair-demo-description">A powered wheelchair user moves through a road scene. This category is uncommon in closed-set driving taxonomies, yet the radar observations form a coherent moving pattern. Teal markers identify moving radar returns, while blue surface markers and arrows indicate PART's predicted surface location and ground-plane velocity. The demonstration highlights class-agnostic detection driven by physical motion rather than a familiar object label.</p>
+            </details>
+          </figure>
+        </div>
+      </section>
+
+      <section id="qualitative" class="section qualitative-section">
+        <div class="section-heading">
+          <p class="section-kicker">Qualitative results</p>
+          <h2>From rare objects to incomplete labels.</h2>
+          <p class="legend"><i class="legend-special"></i> special-category objects &nbsp; <i class="legend-groundtruth"></i> moving ground truth &nbsp; <i class="legend-prediction"></i> PART prediction</p>
+        </div>
+        <div class="gallery">
+          <figure><img src="assets/qualitative/07694_full.jpg" alt="Powered wheelchair user in profile detected by PART."><figcaption>Powered wheelchair user</figcaption></figure>
+          <figure><img src="assets/qualitative/18071_full.jpg" alt="Frontal view of a powered wheelchair user detected by PART."><figcaption>Wheelchair, frontal view</figcaption></figure>
+          <figure><img src="assets/qualitative/18117_full.jpg" alt="Personal-mobility rider behind a guardrail detected by PART."><figcaption>Personal-mobility rider</figcaption></figure>
+          <figure><img src="assets/qualitative/27254_full.jpg" alt="Dog-walking pedestrian at night detected by PART."><figcaption>Pedestrian at night</figcaption></figure>
+          <figure><img src="assets/qualitative/01419_full.jpg" alt="Severely occluded crossing vehicle detected by PART."><figcaption>Occluded crossing vehicle</figcaption></figure>
+          <figure><img src="assets/qualitative/03515_full.jpg" alt="Severely occluded moving vehicle detected by PART."><figcaption>Severely occluded vehicle</figcaption></figure>
+          <figure><img src="assets/qualitative/05462_full.jpg" alt="Rainy night vehicle under headlight glare detected by PART."><figcaption>Rain and headlight glare</figcaption></figure>
+          <figure><img src="assets/qualitative/05475_full.jpg" alt="Occluded crossing vehicle at night detected by PART."><figcaption>Night-time occlusion</figcaption></figure>
+          <figure><img src="assets/qualitative/04029_full.jpg" alt="Unannotated vehicle in rain detected by PART."><figcaption>Unannotated vehicle in rain</figcaption></figure>
+          <figure><img src="assets/qualitative/05938_full.jpg" alt="Unannotated vehicle under headlight glare detected by PART."><figcaption>Unannotated under glare</figcaption></figure>
+          <figure><img src="assets/qualitative/02814_full.jpg" alt="Unannotated oncoming vehicle in rain detected by PART."><figcaption>Unannotated oncoming vehicle</figcaption></figure>
+          <figure><img src="assets/qualitative/05664_full.jpg" alt="Unannotated motorcycle under headlight glare detected by PART."><figcaption>Unannotated motorcycle</figcaption></figure>
+        </div>
+      </section>
+
+      <section id="citation" class="section citation-section">
+        <div class="citation-copy">
+          <p class="section-kicker">Citation</p>
+          <h2>PART</h2>
+          <p>If this work is useful to you, please consider citing our paper.</p>
+        </div>
+        <pre><code>@article{sun2026part,
+  title   = {If It Moves, Radar Knows: A Physics-Aware Radar Transformer for Class-Agnostic Moving-Object Detection},
+  author  = {Sun, Yinghao and Li, Shuguang and Shao, Jinliang and Li, Tieshan},
+  journal = {arXiv preprint arXiv:2609.02289},
+  year    = {2026}
+}</code></pre>
+      </section>
+    </main>
+
+    <footer>
+      <p>PART · Physics-Aware Radar Transformer</p>
+      <a href="../../">Yinghao Sun</a>
+    </footer>
+  </body>
+</html>
